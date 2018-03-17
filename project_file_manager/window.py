@@ -1,5 +1,6 @@
 import sys
 from PyQt5 import QtGui , QtCore , QtWidgets
+from zipfile import*
 
 class Window (QtWidgets.QMainWindow):
     def __init__(self):
@@ -24,6 +25,11 @@ class Window (QtWidgets.QMainWindow):
         openFile.setStatusTip("Open File")
         openFile.triggered.connect(self.file_open)
 
+        openimg = QtWidgets.QAction ("&Open Image" , self)
+        openimg.setShortcut("Ctrl+I")
+        openimg.setStatusTip("Open Image")
+        openimg.triggered.connect(self.open_image)
+
         saveFile = QtWidgets.QAction ("&Save File" , self)
         saveFile.setShortcut("Ctrl+S")
         saveFile.setStatusTip("Save File")
@@ -40,6 +46,8 @@ class Window (QtWidgets.QMainWindow):
         fileMenu.addAction(openFile)
         
         fileMenu.addAction(saveFile)
+
+        fileMenu.addAction(openimg)
         
         editorMenu = mainMenu.addMenu("&Editor")
         editorMenu.addAction(openEditor)
@@ -77,9 +85,11 @@ class Window (QtWidgets.QMainWindow):
         self.progress = QtWidgets.QProgressBar(self)
         self.progress.setGeometry(200,80,250,20)
 
-        self.btn = QtWidgets.QPushButton("Extract",self)
+        self.btn = QtWidgets.QPushButton("convert to ZIP",self)
         self.btn.move(200,120)
-        self.btn.clicked.connect(self.download)
+        self.btn.clicked.connect(self.zip)
+        self.btn.clicked.connect(self.download )
+        
 
 
         self.styleChoice = QtWidgets.QLabel("Best Group",self)
@@ -92,7 +102,7 @@ class Window (QtWidgets.QMainWindow):
         
 
 
-        comboBox.move(50,250)
+        comboBox.move(50,240)
         self.styleChoice.move(50,150)
         comboBox.activated[str].connect(self.style_choice)
 
@@ -101,23 +111,70 @@ class Window (QtWidgets.QMainWindow):
         #cal.resize(200,200)
         
         self.show()
+
+    def zip(self):
+        text , ok = QtWidgets.QInputDialog.getText(None , 'Zip Save' ,"Enter your zip file's name :")
+        if ok == True :
+            
+            file_name = QtWidgets.QFileDialog.getOpenFileName(self , "Witch you want to convert to ZIP")
+
+            if file_name[0] != '':
+                
+                zip_file = ZipFile(text + '.zip' , "w")
+                zip_file.write(file_name[0])
+                zip_file.close()
+            else:
+                pass
+        else:
+            pass
+        
+
+    def open_image(self):
+        name = QtWidgets.QFileDialog.getOpenFileName(self , "open Image")
+        self.setGeometry(10 , 10 , 640 , 400)
+        lable = QtWidgets.QLabel(self)
+        pixmap = QtGui.QPixmap(name[0])
+
+        lable.setPixmap(pixmap)
+
+        self.show()
     
 
     def file_open(self):
         name = QtWidgets.QFileDialog.getOpenFileName(self , "open File")
-        file = open(name , "r")
-        self.editor()
+        #print(QtWidgets.QFileDialog.FileType())
+        print(name)
 
-        with file :
-            text = file.read()
-            self.textEdit.setText(text)
+        if name[0] != '':
+            file = open (name[0] , 'r')
+            print(file)
+            self.editor()
+
+            with file :
+                text = file.read()
+                self.textEdit.setText(text)
+        else:
+            pass
+
+        
         
 
 
 
 
     def file_save(self):
-        name = QtWidgets.QFileDialog.getSaveFile(self , 'save File')
+        name = QtWidgets.QFileDialog.getSaveFileName(self,"save File")
+        
+
+        if name[0] != '':
+            file = open(name[0] , 'w')
+            text = self.textEdit.toPlainText()
+
+            file.write(text)
+            file.close()
+        else:
+            pass
+
 
     def editor(self):
         self.textEdit = QtWidgets.QTextEdit()
