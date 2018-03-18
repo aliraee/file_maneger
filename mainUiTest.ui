@@ -176,7 +176,13 @@
     <addaction name="actionPaste_2"/>
     <addaction name="actionSave"/>
    </widget>
+   <widget class="QMenu" name="menuExit">
+    <property name="title">
+     <string>Exit</string>
+    </property>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuExit"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
