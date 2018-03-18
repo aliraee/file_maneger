@@ -1,0 +1,8 @@
+*** Project FileManager ***
+Iran University of Science and Technology (IUST)
+College of computer engineering
+Developers:
+	- Seyyed Ali Ayati
+	- Ali Raee
+	- Mir Hossein
+	- AmirReza Zand
