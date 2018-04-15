@@ -1,0 +1,18 @@
+File Menu:
+	Open(Ctrl + O) 		--> Open selected file by defualt appliction or open selected folder by windows explorer
+	New Folder(Ctrl + N) 	--> Create a new folder with the name that user wants but its name shoudn't be the same as others !
+	Search(Ctrl + S)    	--> This part use for search file extension (such as '.txt', '.mp3', ...) or search the full name of a file !
+	Back(Ctrl + P) 		--> Just go to the previous directory ! This not Undo !
+	Exit(Ctrl + Q) 		--> Exits from application
+Edit Menu:
+	Cut(Ctrl + X) 		--> Cut the selected file ! Doesn't support folders !
+	Copy(Ctrl + C) 		--> Copy the selected file ! Doesn't support folders !
+	Paste(Ctrl + V) 	--> Paste the cuted or copied file !
+	Rename(F2) 		--> Renames the selected file or folder !
+	Delete(Del) 		--> Deletes the selected file or folder ! Becareful because we don't have undo !
+Network Menu:
+	Connect(F3)		--> Connect to a remote computer !
+	Chat(F4)		--> Chat with a remote computer after connection !
+More Menu:
+	Help(F1)		--> Show the help file : Help.txt
+	About Us(F5)		--> Show the details about us

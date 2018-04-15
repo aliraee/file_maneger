@@ -1,0 +1,3 @@
+﻿1. requesting
+2. See, Delete, Cut and Copy another files and folders and make NewFolder
+3. Share files and chat service

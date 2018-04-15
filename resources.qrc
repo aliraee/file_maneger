@@ -1,0 +1,15 @@
+<RCC>
+  <qresource prefix="/icons">
+    <file>new.ico</file>
+    <file>back.ico</file>
+    <file>go.ico</file>
+    <file>home.ico</file>
+    <file>folder.ico</file>
+    <file>folder2.ico</file>
+    <file>music.ico</file>
+    <file>video.ico</file>
+    <file>text.ico</file>
+    <file>none.ico</file>
+    <file>pic.ico</file>
+  </qresource>
+</RCC>
