@@ -1,32 +1,18 @@
 import socket
 import threading
-
-socketserver = socket.socket(socket.AF_INET , socket.SOCK_STREAM)
-socketserver.bind(('172.17.8.37',4444))
-socketserver.listen(2)
-
-
+class server:
+    def __init__(self, to):
+        self.to = to
+        self.msg = ''
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.bind(('127.0.0.1', 9909))
+        self.s.listen(2)
+        self.client, self.ip = self.s.accept()
 #functions
-def recive_server_from_client():
-    buf = connection.recv(1024).decode('UTF-8')
-    if len(buf) > 0:
-        print(buf)
-def send_to_client():
-    mas = input().encode('UTF-8')
-    connection.send(mas)
-
-
-
-
-while True:
-    connection,address = socketserver.accept()
-    while True:
-        t1 = threading.Thread( target = recive_server_from_client())
-        t2 = threading.Thread( target = send_to_client())
-        t1.start()
-        t2.start()
-        #t1.join()
-        #t2.join()
-
-        
-        
+    def recive(self):
+        buf = self.client.recv(1024).decode('UTF-8')
+        if len(buf) > 0:
+            self.msg+=buf
+        return self.msg
+    def send(self,msg):
+        self.client.sendall(msg.encode('UTF-8'))
